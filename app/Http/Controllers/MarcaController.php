@@ -26,8 +26,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         $marca = Marca::create($request->all());
-        dd($marca);
-        return 'Marca cadastrada com sucesso!';
+        return response()->json($marca, 201);
     }
 
     /**
