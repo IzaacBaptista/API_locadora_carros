@@ -44,7 +44,12 @@ class MarcaController extends Controller
     public function show($id)
     {
         $marca = $this->marca::find($id);
-        return Response()->json($marca);
+
+        if(!$marca || $marca == null){
+            return response()->json(['msg' => 'Marca não encontrada']);
+        }
+
+        return response()->json(['marca: ' => $marca]);
     }
 
     /**
@@ -57,7 +62,13 @@ class MarcaController extends Controller
     public function update(Request $request, $id)
     {
         $marca = $this->marca->find($id);
+        
+        if(!$marca || $marca == null){
+            return response()->json(['msg' => 'Marca não encontrada']);
+        }
+
         $marca->update($request->all());
+        
         return response()->json(['marca' => $marca, 'msg' => 'Atualizado com sucesso']);
     }
 
@@ -70,6 +81,11 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         $marca = $this->marca->find($id);
+
+        if(!$marca || $marca == null){
+            return response()->json(['msg' => 'Marca não encontrada']);
+        }
+        
         $marca->delete();
         return response()->json(['marca' => $marca, 'msg' => 'Deletado com sucesso']);
     }
