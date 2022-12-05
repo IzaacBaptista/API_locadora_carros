@@ -9,6 +9,8 @@ class Marca extends Model
 {
     use HasFactory;
 
+    protected $table = 'marcas';
+
     protected $fillable = [
         'nome',
         'imagem'
@@ -16,7 +18,7 @@ class Marca extends Model
 
     public function rules(){
         return [
-            'nome' => 'required|unique:marcas|max:255|min:3',
+            'nome' => 'required|unique:marcas,nome,'.$this->id.'|max:255|min:3',
             'descricao' => 'required',
         ];
     }
