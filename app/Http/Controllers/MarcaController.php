@@ -20,7 +20,9 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = $this->marca->all();
-        return response()->json(['marca' => $marcas], 200);
+        return response()->json([
+            'marca' => $marcas
+        ], 200);
     }
 
     /**
@@ -31,8 +33,25 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
+        $regras = [
+            'nome' => 'required|unique:marcas|max:255',
+            'descricao' => 'required',
+        ];
+        
+        $feedback = [
+            'required' => 'O campo :attribute é obrigatório',
+            'nome.unique' => 'O nome informado já existe',
+        ];
+        
+        $request->validate($regras, $feedback);
+        
         $marca = $this->marca->create($request->all());
-        return response()->json(['marca' => $marca, 'msg' => 'Salvo com sucesso'], 201);
+        
+        return response()->json([
+            'marca' => $marca, 
+            'msg' => 'Salvo com sucesso'
+        ], 201);
+    
     }
 
     /**
@@ -49,7 +68,10 @@ class MarcaController extends Controller
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
-        return response()->json(['marca: ' => $marca]);
+        return response()->json([
+            'marca: ' => $marca
+        ], 200);
+
     }
 
     /**
@@ -67,9 +89,15 @@ class MarcaController extends Controller
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
+        
+
         $marca->update($request->all());
         
-        return response()->json(['marca' => $marca, 'msg' => 'Atualizado com sucesso'], 200);
+        return response()->json([
+            'marca' => $marca, 
+            'msg' => 'Atualizado com sucesso'
+        ], 200);
+
     }
 
     /**
@@ -87,6 +115,11 @@ class MarcaController extends Controller
         }
         
         $marca->delete();
-        return response()->json(['marca' => $marca, 'msg' => 'Deletado com sucesso'], 200);
+
+        return response()->json([
+            'marca' => $marca, 
+            'msg' => 'Deletado com sucesso'
+        ], 200);
+
     }
 }
