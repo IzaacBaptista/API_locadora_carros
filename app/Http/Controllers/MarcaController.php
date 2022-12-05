@@ -32,7 +32,7 @@ class MarcaController extends Controller
     public function store(Request $request)
     {
         $marca = $this->marca->create($request->all());
-        return response()->json(['marca' => $marca, 'msg' => 'Salvo com sucesso']);
+        return response()->json(['marca' => $marca, 'msg' => 'Salvo com sucesso'], 201);
     }
 
     /**
@@ -41,12 +41,12 @@ class MarcaController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $marca = $this->marca::find($id);
 
         if(!$marca || $marca == null){
-            return response()->json(['msg' => 'Marca não encontrada']);
+            return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
         return response()->json(['marca: ' => $marca]);
@@ -59,17 +59,17 @@ class MarcaController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $marca = $this->marca->find($id);
         
         if(!$marca || $marca == null){
-            return response()->json(['msg' => 'Marca não encontrada']);
+            return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
         $marca->update($request->all());
         
-        return response()->json(['marca' => $marca, 'msg' => 'Atualizado com sucesso']);
+        return response()->json(['marca' => $marca, 'msg' => 'Atualizado com sucesso'], 200);
     }
 
     /**
@@ -78,15 +78,15 @@ class MarcaController extends Controller
      * @param  Integer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $marca = $this->marca->find($id);
 
         if(!$marca || $marca == null){
-            return response()->json(['msg' => 'Marca não encontrada']);
+            return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
         
         $marca->delete();
-        return response()->json(['marca' => $marca, 'msg' => 'Deletado com sucesso']);
+        return response()->json(['marca' => $marca, 'msg' => 'Deletado com sucesso'], 200);
     }
 }
