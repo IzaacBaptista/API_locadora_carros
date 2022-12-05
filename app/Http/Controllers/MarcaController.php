@@ -32,18 +32,11 @@ class MarcaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $regras = [
-            'nome' => 'required|unique:marcas|max:255',
-            'descricao' => 'required',
-        ];
-        
-        $feedback = [
-            'required' => 'O campo :attribute é obrigatório',
-            'nome.unique' => 'O nome informado já existe',
-        ];
-        
-        $request->validate($regras, $feedback);
+    {        
+        $request->validate(
+            $this->marca->rules(), 
+            $this->marca->feedback()
+        );
         
         $marca = $this->marca->create($request->all());
         
