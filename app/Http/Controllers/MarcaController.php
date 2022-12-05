@@ -80,9 +80,12 @@ class MarcaController extends Controller
         
         if(!$marca || $marca == null){
             return response()->json(['msg' => 'Marca não encontrada'], 404);
-        }
+        }      
 
-        
+        $request->validate(
+            $this->marca->rules(), 
+            $this->marca->feedback()
+        );
 
         $marca->update($request->all());
         
