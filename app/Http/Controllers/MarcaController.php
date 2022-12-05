@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class MarcaController extends Controller
 {
 
-    public function __construct(Marca $marca){
+    public function __construct(Marca $marca)
+    {
         $this->marca = $marca;
     }
 
@@ -32,19 +33,18 @@ class MarcaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
+    {
         $request->validate(
-            $this->marca->rules(), 
+            $this->marca->rules(),
             $this->marca->feedback()
         );
-        
+
         $marca = $this->marca->create($request->all());
-        
+
         return response()->json([
-            'marca' => $marca, 
+            'marca' => $marca,
             'msg' => 'Salvo com sucesso'
         ], 201);
-    
     }
 
     /**
@@ -57,14 +57,13 @@ class MarcaController extends Controller
     {
         $marca = $this->marca::find($id);
 
-        if(!$marca || $marca == null){
+        if (!$marca || $marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
         return response()->json([
             'marca: ' => $marca
         ], 200);
-
     }
 
     /**
@@ -77,23 +76,36 @@ class MarcaController extends Controller
     public function update(Request $request, int $id)
     {
         $marca = $this->marca->find($id);
-        
-        if(!$marca || $marca == null){
+
+        if (!$marca || $marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
-        }      
+        }
 
-        $request->validate(
-            $this->marca->rules(), 
-            $this->marca->feedback()
-        );
+        if ($request->method() === 'PATCH') {
+            $regrasDinamicas = array();
 
-        $marca->update($request->all());
-        
+            foreach ($marca->rules() as $input => $regra) {
+                if (array_key_exists($input, $request->all())) {
+                    $regrasDinamicas[$input] = $regra;
+                }
+            }
+
+            $request->validate(
+                $regrasDinamicas,
+                $this->marca->feedback()
+            );
+        } else {
+            $request->validate(
+                $this->marca->rules(),
+                $this->marca->feedback()
+            );
+        }
+
+
         return response()->json([
-            'marca' => $marca, 
+            'marca' => $marca,
             'msg' => 'Atualizado com sucesso'
         ], 200);
-
     }
 
     /**
@@ -106,16 +118,15 @@ class MarcaController extends Controller
     {
         $marca = $this->marca->find($id);
 
-        if(!$marca || $marca == null){
+        if (!$marca || $marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
-        
+
         $marca->delete();
 
         return response()->json([
-            'marca' => $marca, 
+            'marca' => $marca,
             'msg' => 'Deletado com sucesso'
         ], 200);
-
     }
 }
