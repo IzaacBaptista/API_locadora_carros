@@ -20,7 +20,7 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = $this->marca->all();
-        return response()->json(['marca' => $marcas]);
+        return response()->json(['marca' => $marcas], 200);
     }
 
     /**
