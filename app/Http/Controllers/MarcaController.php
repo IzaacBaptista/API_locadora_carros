@@ -39,24 +39,10 @@ class MarcaController extends Controller
             $this->marca->feedback()
         );
 
-        /*
-        dd(
-            $request->nome, 
-            $request->get('nome'),
-            $request->input('nome'),
-            $request->imagem, 
-            $request->file('imagem'),
-            $request->get('imagem')
-        );
-        */
-
-        //$marca = $this->marca->create($request->all());
-
         $image = $request->file('imagem');
         $image->store('imagens', 'public');
 
         return response()->json([
-            //'marca' => $marca,
             'msg' => 'Salvo com sucesso'
         ], 201);
     }
