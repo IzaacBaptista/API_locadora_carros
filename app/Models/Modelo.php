@@ -21,7 +21,8 @@ class Modelo extends Model
         'abs'
     ];
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'marca_id' => 'required',
             'nome' => 'required|unique:modelos,nome,'.$this->id.'|max:255|min:3',
@@ -33,7 +34,8 @@ class Modelo extends Model
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
             'integer' => 'O campo :attribute deve ser um número inteiro',
@@ -44,5 +46,5 @@ class Modelo extends Model
             'nome.max' => 'O nome deve ter no máximo 255 caracteres',
             'nome.min' => 'O nome deve ter no mínimo 3 caracteres',
         ];
-    }    
+    }
 }

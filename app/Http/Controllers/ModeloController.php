@@ -35,7 +35,7 @@ class ModeloController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            $this->modelo->rules(), 
+            $this->modelo->rules(),
             $this->modelo->feedback()
         );
 
@@ -111,10 +111,10 @@ class ModeloController extends Controller
             );
         }
 
-        if($request->file('imagem')) {
+        if ($request->file('imagem')) {
             Storage::disk('public')->delete($modelo->imagem);
         }
-        
+
         $imagem = $request->file('imagem');
         $imagem_urn = $imagem->store('imagens/modelo', 'public');
 
@@ -148,7 +148,7 @@ class ModeloController extends Controller
             return response()->json(['msg' => 'Modelo não encontrado'], 404);
         }
 
-        if($modelo->imagem) {
+        if ($modelo->imagem) {
             Storage::disk('public')->delete($modelo->imagem);
         }
 
