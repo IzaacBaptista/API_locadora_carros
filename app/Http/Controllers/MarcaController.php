@@ -19,10 +19,17 @@ class MarcaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $marcas = $this->marca->with('modelos')->get();
-        
+        $marcas = array();
+
+        if($request->has('atributos')){
+            $atributos = $request->atributos;
+            $marcas = $this->marca->selectRaw($atributos)->with('modelos')->get();
+        } else {
+            $marcas = $this->marca->with('modelos')->get();
+        }
+
         return response()->json([
             'marcas' => $marcas
         ], 200);
