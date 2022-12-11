@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Models\Marca;
 use Illuminate\Http\Request;
 
@@ -21,8 +22,9 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = $this->marca->all();
+        
         return response()->json([
-            'marca' => $marcas
+            'marcas' => $marcas
         ], 200);
     }
 
@@ -63,7 +65,7 @@ class MarcaController extends Controller
     {
         $marca = $this->marca::find($id);
 
-        if (!$marca || $marca == null) {
+        if ($marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
@@ -83,7 +85,7 @@ class MarcaController extends Controller
     {
         $marca = $this->marca->find($id);
 
-        if (!$marca || $marca == null) {
+        if ($marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
@@ -105,6 +107,10 @@ class MarcaController extends Controller
                 $this->marca->rules(),
                 $this->marca->feedback()
             );
+        }
+
+        if($request->file('imagem')) {
+            Storage::disk('public')->delete($marca->imagem);
         }
         
         $imagem = $request->file('imagem');
@@ -131,14 +137,17 @@ class MarcaController extends Controller
     {
         $marca = $this->marca->find($id);
 
-        if (!$marca || $marca == null) {
+        if ($marca == null) {
             return response()->json(['msg' => 'Marca não encontrada'], 404);
+        }
+
+        if($marca->imagem) {
+            Storage::disk('public')->delete($marca->imagem);
         }
 
         $marca->delete();
 
         return response()->json([
-            'marca' => $marca,
             'msg' => 'Deletado com sucesso'
         ], 200);
     }
