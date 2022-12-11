@@ -36,7 +36,7 @@ class ModeloController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            $this->modelo->rules(), 
+            $this->modelo->rules(),
             $this->modelo->feedback()
         );
 
@@ -143,7 +143,7 @@ class ModeloController extends Controller
             return response()->json(['msg' => 'Modelo não encontrado'], 404);
         }
 
-        if($modelo->imagem) {
+        if ($modelo->imagem) {
             Storage::disk('public')->delete($modelo->imagem);
         }
 

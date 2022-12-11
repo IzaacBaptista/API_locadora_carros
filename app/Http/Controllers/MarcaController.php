@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class MarcaController extends Controller
 {
-
     public function __construct(Marca $marca)
     {
         $this->marca = $marca;
@@ -22,7 +21,7 @@ class MarcaController extends Controller
     public function index()
     {
         $marcas = $this->marca->with('modelos')->get();
-        
+
         return response()->json([
             'marcas' => $marcas
         ], 200);
@@ -109,7 +108,7 @@ class MarcaController extends Controller
             );
         }
 
-        if($request->file('imagem')) {
+        if ($request->file('imagem')) {
             Storage::disk('public')->delete($marca->imagem);
         }
 
@@ -140,7 +139,7 @@ class MarcaController extends Controller
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
-        if($marca->imagem) {
+        if ($marca->imagem) {
             Storage::disk('public')->delete($marca->imagem);
         }
 
