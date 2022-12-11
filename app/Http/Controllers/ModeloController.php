@@ -22,14 +22,14 @@ class ModeloController extends Controller
     {
         $modelos = array();
 
-        if($request->has('atributos_marca')){
+        if ($request->has('atributos_marca')) {
             $atributos_marca = $request->atributos_marca;
             $modelos = $this->modelo->with('marca:id,'.$atributos_marca);
-        } else  {
+        } else {
             $modelos = $this->modelo->with('marca');
         }
 
-        if($request->has('atributos')){
+        if ($request->has('atributos')) {
             $atributos = $request->atributos;
             $modelos = $modelos->selectRaw($atributos)->get();
         } else {
@@ -50,7 +50,7 @@ class ModeloController extends Controller
     public function store(Request $request)
     {
         $request->validate(
-            $this->modelo->rules(), 
+            $this->modelo->rules(),
             $this->modelo->feedback()
         );
 
@@ -157,7 +157,7 @@ class ModeloController extends Controller
             return response()->json(['msg' => 'Modelo não encontrado'], 404);
         }
 
-        if($modelo->imagem) {
+        if ($modelo->imagem) {
             Storage::disk('public')->delete($modelo->imagem);
         }
 
