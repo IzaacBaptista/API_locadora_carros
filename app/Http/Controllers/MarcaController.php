@@ -23,11 +23,18 @@ class MarcaController extends Controller
     {
         $marcas = array();
 
+        if($request->has('atributos_modelo')){
+            $atributos_modelos = $request->atributos_modelos;
+            $marcas = $this->marca->with('modelos:marca_id,'.$atributos_modelos);
+        } else  {
+            $marcas = $this->marca->with('modelos');
+        }
+
         if($request->has('atributos')){
             $atributos = $request->atributos;
-            $marcas = $this->marca->selectRaw($atributos)->with('modelos')->get();
+            $marcas = $marcas->selectRaw($atributos)->get();
         } else {
-            $marcas = $this->marca->with('modelos')->get();
+            $marcas = $marcas->get();
         }
 
         return response()->json([
