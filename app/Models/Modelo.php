@@ -44,5 +44,9 @@ class Modelo extends Model
             'nome.max' => 'O nome deve ter no máximo 255 caracteres',
             'nome.min' => 'O nome deve ter no mínimo 3 caracteres',
         ];
-    }    
+    }
+
+    public function marca(){
+        return $this->belongsTo('App\Models\Marca');
+    }
 }
