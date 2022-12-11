@@ -12,6 +12,7 @@ class ModeloController extends Controller
     {
         $this->modelo = $modelo;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +55,7 @@ class ModeloController extends Controller
 
         return response()->json([
             'modelo: ' => $modelo
-        ], 200);
+        ], 201);
     }
 
     /**
@@ -111,14 +112,14 @@ class ModeloController extends Controller
             );
         }
 
-        if($request->file('imagem')) {
+        if ($request->file('imagem')) {
             Storage::disk('public')->delete($modelo->imagem);
         }
-        
-        $imagem = $request->file('imagem');
-        $imagem_urn = $imagem->store('imagens/modelo', 'public');
 
-        $modelo = $this->modelo->create([
+        $imagem = $request->file('imagem');
+        $imagem_urn = $imagem->store('imagens/modelos', 'public');
+
+        $modelo = $this->modelo->update([
             'marca_id' => $request->marca_id,
             'nome' => $request->nome,
             'imagem' => $imagem_urn,
