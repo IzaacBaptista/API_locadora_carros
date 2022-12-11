@@ -16,14 +16,16 @@ class Marca extends Model
         'imagem'
     ];
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'nome' => 'required|unique:marcas,nome,'.$this->id.'|max:255|min:3',
             'imagem' => 'required|file|mimes:jpg,png,jpeg',
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
             'imagem.mimes' => 'A imagem deve ser do tipo jpg, png ou jpeg',
@@ -33,7 +35,8 @@ class Marca extends Model
         ];
     }
 
-    public function modelos(){
+    public function modelos()
+    {
         return $this->hasMany('App\Models\Modelo');
-    }    
+    }
 }

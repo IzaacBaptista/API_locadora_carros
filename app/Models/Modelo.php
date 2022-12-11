@@ -21,7 +21,8 @@ class Modelo extends Model
         'abs'
     ];
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'marca_id' => 'required',
             'nome' => 'required|unique:modelos,nome,'.$this->id.'|max:255|min:3',
@@ -33,7 +34,8 @@ class Modelo extends Model
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
             'integer' => 'O campo :attribute deve ser um número inteiro',
@@ -46,7 +48,8 @@ class Modelo extends Model
         ];
     }
 
-    public function marca(){
+    public function marca()
+    {
         return $this->belongsTo('App\Models\Marca');
     }
 }
