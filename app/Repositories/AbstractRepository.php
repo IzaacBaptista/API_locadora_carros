@@ -4,8 +4,8 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 
-abstract class AbstractRepository {
-    
+abstract class AbstractRepository
+{
     public function __construct(Model $model)
     {
         $this->model = $model;
