@@ -2,6 +2,6 @@
 
 namespace App\Repositories;
 
-class CarroRepository extends AbstractRepository {
-
+class CarroRepository extends AbstractRepository
+{
 }

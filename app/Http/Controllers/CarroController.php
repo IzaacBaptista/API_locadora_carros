@@ -8,7 +8,6 @@ use App\Repositories\CarroRepository;
 
 class CarroController extends Controller
 {
-
     public function __construct(Carro $carro)
     {
         $this->carro = $carro;

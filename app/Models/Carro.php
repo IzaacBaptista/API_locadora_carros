@@ -13,7 +13,8 @@ class Carro extends Model
 
     protected $fillable = ['modelo_id', 'placa', 'disponivel', 'km'];
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'modelo_id' => 'exists:modelos,id',
             'placa' => 'required',
@@ -22,15 +23,17 @@ class Carro extends Model
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
             'modelo_id.exists' => 'O modelo informado não existe'
         ];
     }
-    
 
-    public function modelo() {
+
+    public function modelo()
+    {
         return $this->belongsTo('App\Models\Modelo');
     }
 }
