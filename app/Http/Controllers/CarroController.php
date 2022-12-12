@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCarroRequest;
-use App\Http\Requests\UpdateCarroRequest;
 use App\Models\Carro;
 use Illuminate\Http\Request;
 use App\Repositories\CarroRepository;
-use Illuminate\Support\Facades\Storage;
 
 class CarroController extends Controller
 {
-    public function __construct(Carro $carro) {
+
+    public function __construct(Carro $carro)
+    {
         $this->carro = $carro;
     }
 
@@ -24,34 +23,24 @@ class CarroController extends Controller
     {
         $carroRepository = new CarroRepository($this->carro);
 
-        if($request->has('atributos_modelo')) {
-            $atributos_modelo = 'modelo:id,'.$request->atributos_modelo;
+        if ($request->has('atributos_modelo')) {
+            $atributos_modelo = 'modelo:marca_id,' . $request->atributos_modelo;
             $carroRepository->selectAtributosRegistrosRelacionados($atributos_modelo);
         } else {
             $carroRepository->selectAtributosRegistrosRelacionados('modelo');
         }
 
-        if($request->has('filtro')) {
+        if ($request->has('filtro')) {
             $carroRepository->filtro($request->filtro);
         }
 
-        if($request->has('atributos')) {
+        if ($request->has('atributos')) {
             $carroRepository->selectAtributos($request->atributos);
-        } 
+        }
 
         return response()->json([
-            'carro:' => $carroRepository->getResultado()
+            'carro' => $carroRepository->getResultado()
         ], 200);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -83,12 +72,12 @@ class CarroController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Carro  $carro
+     * @param  Integer
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
     {
-        $carro = $this->carro->with('modelos')->find($id);
+        $carro = $this->carro->with('modelo')->find($id);
 
         if ($carro == null) {
             return response()->json(['msg' => 'Carro não encontrado'], 404);
@@ -100,21 +89,10 @@ class CarroController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Carro  $carro
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Carro $carro)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Carro  $carro
+     * @param  Integer
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, int $id)
@@ -125,17 +103,15 @@ class CarroController extends Controller
             return response()->json(['msg' => 'Carro não encontrado'], 404);
         }
 
-
-        if($request->method() === 'PATCH') {
-
+        if ($request->method() === 'PATCH') {
             $regrasDinamicas = array();
 
-            foreach($carro->rules() as $input => $regra) {
-                if(array_key_exists($input, $request->all())) {
+            foreach ($carro->rules() as $input => $regra) {
+                if (array_key_exists($input, $request->all())) {
                     $regrasDinamicas[$input] = $regra;
                 }
             }
-            
+
             $request->validate(
                 $regrasDinamicas,
                 $this->carro->feedback()
@@ -149,7 +125,7 @@ class CarroController extends Controller
 
         $carro->fill($request->all());
         $carro->save();
-        
+
         return response()->json([
             'carro' => $carro,
             'msg' => 'Atualizado com sucesso'
@@ -159,7 +135,7 @@ class CarroController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Carro  $carro
+     * @param  Integer
      * @return \Illuminate\Http\Response
      */
     public function destroy(int $id)
@@ -171,7 +147,7 @@ class CarroController extends Controller
         }
 
         $carro->delete();
-        
+
         return response()->json([
             'msg' => 'Deletado com sucesso'
         ], 200);
