@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Marca;
 use Illuminate\Http\Request;
+use App\Repositories\MarcaRepository;
 
 class MarcaController extends Controller
 {
@@ -21,32 +22,25 @@ class MarcaController extends Controller
      */
     public function index(Request $request)
     {
-        $marcas = array();
+        $marcaRepository = new MarcaRepository($this->marca);
 
         if ($request->has('atributos_modelos')) {
-            $atributos_modelos = $request->atributos_modelos;
-            $marcas = $this->marca->with('modelos:marca_id,' . $atributos_modelos);
+            $atributos_modelos = 'modelos:marca_id,' . $request->atributos_modelos;
+            $marcaRepository->selectAtributosRegistrosRelacionados($atributos_modelos);
         } else {
-            $marcas = $this->marca->with('modelos');
+            $marcaRepository->selectAtributosRegistrosRelacionados('modelos');
         }
 
         if ($request->has('filtro')) {
-            $filtros = explode(';', $request->filtro);
-            foreach ($filtros as $key => $condicao) {
-                $c = explode(':', $condicao);
-                $marcas = $marcas->where($c[0], $c[1], $c[2]);
-            }
+            $marcaRepository->filtro($request->filtro);
         }
 
         if ($request->has('atributos')) {
-            $atributos = $request->atributos;
-            $marcas = $marcas->selectRaw($atributos)->get();
-        } else {
-            $marcas = $marcas->get();
+            $marcaRepository->selectAtributos($request->atributos);
         }
 
         return response()->json([
-            'marcas' => $marcas
+            'marcas' => $marcaRepository->getResultado()
         ], 200);
     }
 
@@ -64,7 +58,7 @@ class MarcaController extends Controller
         );
 
         $imagem = $request->file('imagem');
-        $imagem_urn = $imagem->store('imagens', 'public');
+        $imagem_urn = $imagem->store('imagens/marcas', 'public');
 
         $marca = $this->marca->create([
             'nome' => $request->nome,
@@ -136,7 +130,7 @@ class MarcaController extends Controller
         }
 
         $imagem = $request->file('imagem');
-        $imagem_urn = $imagem->store('imagens', 'public');
+        $imagem_urn = $imagem->store('imagens/marcas', 'public');
 
         $marca->fill($request->all());
         $marca->imagem = $imagem_urn;
