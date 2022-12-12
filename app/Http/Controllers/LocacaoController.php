@@ -8,7 +8,6 @@ use App\Repositories\LocacaoRepository;
 
 class LocacaoController extends Controller
 {
-
     public function __construct(Locacao $locacao)
     {
         $this->locacao = $locacao;

@@ -2,6 +2,6 @@
 
 namespace App\Repositories;
 
-class LocacaoRepository extends AbstractRepository {
-
+class LocacaoRepository extends AbstractRepository
+{
 }

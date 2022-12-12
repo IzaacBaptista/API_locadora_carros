@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Locacao extends Model
 {
     use HasFactory;
-    
+
     protected $table = 'locacoes';
 
     protected $fillable = [
@@ -22,7 +22,8 @@ class Locacao extends Model
         'km_final',
     ];
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'cliente_id' => 'required|integer',
             'carro_id' => 'required|integer',
@@ -35,7 +36,8 @@ class Locacao extends Model
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
             'integer' => 'O campo :attribute deve ser um número inteiro',
