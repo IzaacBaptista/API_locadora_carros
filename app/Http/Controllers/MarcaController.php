@@ -23,7 +23,7 @@ class MarcaController extends Controller
     {
         $marcas = array();
 
-        if ($request->has('atributos_modelo')) {
+        if ($request->has('atributos_modelos')) {
             $atributos_modelos = $request->atributos_modelos;
             $marcas = $this->marca->with('modelos:marca_id,' . $atributos_modelos);
         } else {
