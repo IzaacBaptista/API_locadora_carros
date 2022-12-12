@@ -23,14 +23,19 @@ class MarcaController extends Controller
     {
         $marcas = array();
 
-        if($request->has('atributos_modelo')){
+        if ($request->has('atributos_modelo')) {
             $atributos_modelos = $request->atributos_modelos;
-            $marcas = $this->marca->with('modelos:marca_id,'.$atributos_modelos);
-        } else  {
+            $marcas = $this->marca->with('modelos:marca_id,' . $atributos_modelos);
+        } else {
             $marcas = $this->marca->with('modelos');
         }
 
-        if($request->has('atributos')){
+        if ($request->has('filtro')) {
+            $condicoes = explode(':', $request->filtro);
+            $marcas = $marcas->where($condicoes[0], $condicoes[1], $condicoes[2]);
+        }
+
+        if ($request->has('atributos')) {
             $atributos = $request->atributos;
             $marcas = $marcas->selectRaw($atributos)->get();
         } else {
@@ -123,7 +128,7 @@ class MarcaController extends Controller
             );
         }
 
-        if($request->file('imagem')) {
+        if ($request->file('imagem')) {
             Storage::disk('public')->delete($marca->imagem);
         }
 
@@ -154,7 +159,7 @@ class MarcaController extends Controller
             return response()->json(['msg' => 'Marca não encontrada'], 404);
         }
 
-        if($marca->imagem) {
+        if ($marca->imagem) {
             Storage::disk('public')->delete($marca->imagem);
         }
 
