@@ -13,13 +13,15 @@ class Cliente extends Model
 
     protected $fillable = ['nome'];
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'nome' => 'required'
         ];
     }
 
-    public function feedback(){
+    public function feedback()
+    {
         return [
             'required' => 'O campo :attribute é obrigatório',
         ];

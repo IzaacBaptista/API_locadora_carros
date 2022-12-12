@@ -8,7 +8,6 @@ use App\Repositories\ClienteRepository;
 
 class ClienteController extends Controller
 {
-
     public function __construct(Cliente $cliente)
     {
         $this->cliente = $cliente;
