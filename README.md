@@ -1,15 +1,63 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel RESTful API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple example of how to create a RESTful API in Laravel 9.
 
-## Projeto de API para um sistema de locadora de carros
+## Endpoints Marcas
 
-### Tecnologias usadas:
-- Laravel
-- PHP
-- Postman
+Get all marcas: `GET /api/marca`
+
+Get a single marcas: `GET /api/marca/{id}`
+
+Create a new marcas: `POST /api/marca`
+
+Update a marcas: `PUT or PATCH /api/marca/{id}`
+
+Delete a marcas: `DELETE /api/marca/{id}`
+
+## Endpoints Carros
+
+Get all modelos: `GET /api/modelo`
+
+Get a single modelo: `GET /api/modelo/{id}`
+
+Create a new modelo: `POST /api/modelo`
+
+Update a modelo: `PUT or PATCH /api/modelo/{id}`
+
+Delete a modelo: `DELETE /api/modelo/{id}`
+
+## Endpoints Modelos
+
+Get all modelos: `GET /api/modelo`
+
+Get a single modelo: `GET /api/modelo/{id}`
+
+Create a new modelo: `POST /api/modelo`
+
+Update a modelo: `PUT or PATCH /api/modelo/{id}`
+
+Delete a modelo: `DELETE /api/modelo/{id}`
+
+## Endpoints Locações
+
+Get all modelos: `GET /api/modelo`
+
+Get a single modelo: `GET /api/modelo/{id}`
+
+Create a new modelo: `POST /api/modelo`
+
+Update a modelo: `PUT or PATCH /api/modelo/{id}`
+
+Delete a modelo: `DELETE /api/modelo/{id}`
+
+## Endpoints Clientes
+
+Get all modelos: `GET /api/modelo`
+
+Get a single modelo: `GET /api/modelo/{id}`
+
+Create a new modelo: `POST /api/modelo`
+
+Update a modelo: `PUT or PATCH /api/modelo/{id}`
+
+Delete a modelo: `DELETE /api/modelo/{id}`
