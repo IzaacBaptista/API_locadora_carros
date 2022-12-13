@@ -16,15 +16,15 @@ Delete a marcas: `DELETE /api/marca/{id}`
 
 ## Endpoints Carros
 
-Get all modelos: `GET /api/modelo`
+Get all carros: `GET /api/carro`
 
-Get a single modelo: `GET /api/modelo/{id}`
+Get a single carro: `GET /api/carro/{id}`
 
-Create a new modelo: `POST /api/modelo`
+Create a new carro: `POST /api/carro`
 
-Update a modelo: `PUT or PATCH /api/modelo/{id}`
+Update a carro: `PUT or PATCH /api/carro/{id}`
 
-Delete a modelo: `DELETE /api/modelo/{id}`
+Delete a carro: `DELETE /api/carro/{id}`
 
 ## Endpoints Modelos
 
@@ -40,24 +40,24 @@ Delete a modelo: `DELETE /api/modelo/{id}`
 
 ## Endpoints Locações
 
-Get all modelos: `GET /api/modelo`
+Get all locações: `GET /api/locacao`
 
-Get a single modelo: `GET /api/modelo/{id}`
+Get a single locação: `GET /api/locacao/{id}`
 
-Create a new modelo: `POST /api/modelo`
+Create a new locação: `POST /api/locacao`
 
-Update a modelo: `PUT or PATCH /api/modelo/{id}`
+Update a locação: `PUT or PATCH /api/locacao/{id}`
 
-Delete a modelo: `DELETE /api/modelo/{id}`
+Delete a locação: `DELETE /api/locacao/{id}`
 
 ## Endpoints Clientes
 
-Get all modelos: `GET /api/modelo`
+Get all clientes: `GET /api/cliente`
 
-Get a single modelo: `GET /api/modelo/{id}`
+Get a single cliente: `GET /api/cliente/{id}`
 
-Create a new modelo: `POST /api/modelo`
+Create a new cliente: `POST /api/cliente`
 
-Update a modelo: `PUT or PATCH /api/modelo/{id}`
+Update a cliente: `PUT or PATCH /api/cliente/{id}`
 
-Delete a modelo: `DELETE /api/modelo/{id}`
+Delete a cliente: `DELETE /api/cliente/{id}`
