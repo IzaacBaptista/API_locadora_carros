@@ -6,13 +6,13 @@ A simple example of how to create a RESTful API in Laravel 9.
 
 Get all marcas: `GET /api/marca`
 
-Get a single marcas: `GET /api/marca/{id}`
+Get a single marca: `GET /api/marca/{id}`
 
-Create a new marcas: `POST /api/marca`
+Create a new marca: `POST /api/marca`
 
-Update a marcas: `PUT or PATCH /api/marca/{id}`
+Update a marca: `PUT or PATCH /api/marca/{id}`
 
-Delete a marcas: `DELETE /api/marca/{id}`
+Delete a marca: `DELETE /api/marca/{id}`
 
 ## Endpoints Carros
 
